@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> teste 1 </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        .canvas-container {
+            position: relative;
+            border: 2px solid #ff6b6b;
+            border-radius: 10px;
+            margin: 20px auto;
+            overflow: hidden;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: white;
+        }
+
+        #interactiveCanvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .tools {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tools button {
+            background-color: #ff6b6b;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .tools button:hover {
+            transform: scale(1.1);
+            background-color: #d64848;
+        }
+
+        footer {
+            margin-top: 20px;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #ff6b6b;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>teste</h1>
+
+        <div class="canvas-container">
+            <canvas id="interactiveCanvas"></canvas>
+        </div>
+
+        <div class="tools">
+            <button onclick="addCircle()">add circulo</button>
+            <button onclick="addSquare()">add quadrado</button>
+            <button onclick="clearCanvas()">limpar</button>
+        </div>
+
+        <footer>
+            ana ❤️  
+        </footer>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('interactiveCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = 400;
+        canvas.height = 300;
+
+        function randomColor() {
+            return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+        }
+
+        function randomPosition(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        function addCircle() {
+            const x = randomPosition(canvas.width);
+            const y = randomPosition(canvas.height);
+            const radius = randomPosition(50) + 10;
+            ctx.fillStyle = randomColor();
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function addSquare() {
+            const x = randomPosition(canvas.width - 50);
+            const y = randomPosition(canvas.height - 50);
+            const size = randomPosition(50) + 10;
+            ctx.fillStyle = randomColor();
+            ctx.fillRect(x, y, size, size);
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+</body>
+</html>
